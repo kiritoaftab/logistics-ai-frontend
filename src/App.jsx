@@ -1,15 +1,9 @@
-
-import './App.css'
+import React from "react";
+import "reactflow/dist/style.css";
+import FlowPage from "./pages/FlowPage";
 
 function App() {
-
-  return (
-    <>
-       <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-    </>
-  )
+  return <FlowPage />;
 }
 
-export default App
+export default App;
