@@ -204,7 +204,25 @@ export default function QueryNode({ data, id, selected }) {
                 )}
               </div>
             )}
+{/* Metrics Display */}
+{response.metrics && Object.keys(response.metrics).length > 0 && (
+  <div className="grid grid-cols-2 gap-2 mt-2">
+    {Object.entries(response.metrics).map(([key, value]) => (
+      <div key={key} className="bg-gray-50 p-2 rounded border border-gray-200">
+        <div className="text-[9px] text-gray-500 uppercase">{key.replace(/_/g, ' ')}</div>
+        <div className="text-sm font-semibold text-gray-800">{value}</div>
+      </div>
+    ))}
+  </div>
+)}
 
+{/* Row Count and Execution Time */}
+{response.rowCount && (
+  <div className="flex justify-between text-[9px] text-gray-400 mt-1">
+    <span>{response.rowCount} row(s) returned</span>
+    {response.executionTime && <span>{(response.executionTime / 1000).toFixed(2)}s</span>}
+  </div>
+)}
             {/* SQL Section */}
             {response.sql && (
               <details className="border border-gray-200 rounded-lg mt-2">

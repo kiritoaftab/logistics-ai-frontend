@@ -1,3 +1,4 @@
+// components/ask/AskPopover.jsx
 import React, { useMemo } from 'react';
 
 const AskPopover = ({
@@ -27,7 +28,10 @@ const AskPopover = ({
             {related.map((r, i) => (
               <button
                 key={i}
-                onClick={() => onRelatedSelect?.(r)}
+                onClick={() => {
+                  console.log('Related question selected:', r);
+                  onRelatedSelect?.(r);
+                }}
                 className="w-full text-left px-2 py-1 text-[10px] text-blue-600 hover:bg-blue-50 rounded"
               >
                 {r}
@@ -56,7 +60,10 @@ const AskPopover = ({
             Cancel
           </button>
           <button
-            onClick={onSubmit}
+            onClick={() => {
+              console.log('Submit clicked with value:', value);
+              onSubmit();
+            }}
             className="px-3 py-1 text-[10px] font-medium bg-blue-600 text-white rounded hover:bg-blue-700"
           >
             Create
