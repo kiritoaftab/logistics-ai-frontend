@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// Create an Axios instance with the base URL
 const apiClient = axios.create({
   baseURL: 'https://ai.uur.co.in/api',
   headers: {
@@ -59,7 +58,6 @@ export const getThreads = async (limit = 10, offset = 0) => {
   }
 };
 
-// Get a single thread by ID with all its nodes
 export const getThreadById = async (threadId) => {
   try {
     const response = await apiClient.get(`/ai/threads/${threadId}`);
@@ -70,7 +68,6 @@ export const getThreadById = async (threadId) => {
   }
 };
 
-// Delete a thread by ID
 export const deleteThread = async (threadId) => {
   try {
     const response = await apiClient.delete(`/ai/threads/${threadId}`);
