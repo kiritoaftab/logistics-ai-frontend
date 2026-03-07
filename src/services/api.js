@@ -39,6 +39,7 @@ export const sendFollowUp = async (question, threadId, parentNodeId) => {
 
     const response = await apiClient.post('/ai/follow-up', requestBody);
     return response.data;
+    
   } catch (error) {
     console.error('Follow-up API Error:', error);
     throw error;
