@@ -36,7 +36,7 @@ jobs:
             set -e
 
             # go to your project directory on the server
-            cd /home/logistics/logistics-warehouse
+            cd /home/logistics/logistics-ai-frontend
             # update code
             git stash || true
             git fetch --all
