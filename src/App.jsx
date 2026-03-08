@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Sidebar from "./sidebar/Sidebar";
 import FlowPage from "./pages/FlowPage";
+import Login from "./pages/LoginPage";
 
 function FlowLayout() {
   const [collapsed, setCollapsed] = React.useState(false);
@@ -33,8 +34,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<FlowLayout />} />
+        {/* <Route path="/" element={<FlowLayout />} /> */}
         <Route path="/flow" element={<FlowLayout />} />
+        <Route path="/" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
