@@ -2,8 +2,91 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Handle, Position } from "reactflow";
 import PlusBtn from "../btn/PlusBtn";
 import AskPopover from "../ask/AskPopover";
+import {
+  BarChart, Bar, LineChart, Line, PieChart, Pie, Cell,
+  XAxis, YAxis, Tooltip, ResponsiveContainer
+} from "recharts";
 
 const PAGE_SIZE = 5;
+const CHART_COLORS = ["#2563eb", "#7c3aed", "#059669", "#d97706", "#dc2626", "#0891b2"];
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (!active || !payload?.length) return null;
+  return (
+    <div className="bg-white border border-gray-200 rounded shadow px-2 py-1 text-[10px]">
+      {label && <p className="text-gray-500 mb-0.5">{label}</p>}
+      <p className="font-semibold text-gray-800">{Number(payload[0].value).toLocaleString()}</p>
+    </div>
+  );
+};
+
+const ChartRenderer = ({ chartType, data, xKey, yKey }) => {
+  const keys = Object.keys(data[0] || {});
+  const resolvedX = xKey || keys[0];
+  const resolvedY = yKey || keys[1];
+
+  const chartData = data.map((d) => ({
+    ...d,
+    [resolvedY]: Number(d[resolvedY]) || 0,
+  }));
+
+  const tickFormatter = (v) =>
+    typeof v === "string" && v.length > 10 ? v.slice(0, 10) + "…" : v;
+
+  if (chartType === "bar" || chartType === "number") {
+    return (
+      <ResponsiveContainer width="100%" height={180}>
+        <BarChart data={chartData} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
+          <XAxis dataKey={resolvedX} tick={{ fontSize: 9 }} tickFormatter={tickFormatter} />
+          <YAxis tick={{ fontSize: 9 }} />
+          <Tooltip content={<CustomTooltip />} />
+          <Bar dataKey={resolvedY} fill="#2563eb" radius={[3, 3, 0, 0]} />
+        </BarChart>
+      </ResponsiveContainer>
+    );
+  }
+
+  if (chartType === "line") {
+    return (
+      <ResponsiveContainer width="100%" height={180}>
+        <LineChart data={chartData} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
+          <XAxis dataKey={resolvedX} tick={{ fontSize: 9 }} tickFormatter={tickFormatter} />
+          <YAxis tick={{ fontSize: 9 }} />
+          <Tooltip content={<CustomTooltip />} />
+          <Line type="monotone" dataKey={resolvedY} stroke="#2563eb" strokeWidth={2} dot={{ r: 3 }} />
+        </LineChart>
+      </ResponsiveContainer>
+    );
+  }
+
+  if (chartType === "pie") {
+    return (
+      <ResponsiveContainer width="100%" height={180}>
+        <PieChart>
+          <Pie
+            data={chartData}
+            dataKey={resolvedY}
+            nameKey={resolvedX}
+            cx="50%"
+            cy="50%"
+            outerRadius={70}
+            label={({ name, percent }) =>
+              `${String(name).slice(0, 8)} ${(percent * 100).toFixed(0)}%`
+            }
+            labelLine={false}
+          >
+            {chartData.map((_, i) => (
+              <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+            ))}
+          </Pie>
+          <Tooltip content={<CustomTooltip />} />
+        </PieChart>
+      </ResponsiveContainer>
+    );
+  }
+
+  return null;
+};
 
 export default function QueryNode({ data, id, selected }) {
   const containerRef = useRef(null);
@@ -286,51 +369,17 @@ export default function QueryNode({ data, id, selected }) {
               </div>
             )}
 
-            {response?.chart && chartType === "bar" && hasTable && (
+            {response?.chart && chartType && chartType !== "none" && chartType !== "table" && hasTable && (
               <div className="mt-2">
                 <h4 className="text-[10px] font-semibold text-gray-700 mb-2">
                   {chartTitle}
                 </h4>
-
-                <div className="space-y-1.5">
-                  {(() => {
-                    const firstRow = tableData[0];
-                    const keys = Object.keys(firstRow || {});
-                    const xKey =
-                      response.chart.x || response.chart.x_axis || keys[0];
-                    const yKey =
-                      response.chart.y || response.chart.y_axis || keys[1];
-
-                    const numericValues = tableData
-                      .map((d) => Number(d[yKey]) || 0)
-                      .filter((v) => Number.isFinite(v));
-
-                    const maxValue = Math.max(...numericValues, 1);
-
-                    return tableData.map((item, i) => {
-                      const label = item[xKey];
-                      const value = Number(item[yKey]) || 0;
-                      const width = (value / maxValue) * 100;
-
-                      return (
-                        <div key={i} className="flex items-center gap-2">
-                          <span className="text-[10px] text-gray-600 w-20 truncate">
-                            {label}
-                          </span>
-                          <div className="flex-1 h-4 bg-gray-100 rounded overflow-hidden">
-                            <div
-                              className="h-full bg-blue-600 rounded"
-                              style={{ width: `${width}%` }}
-                            />
-                          </div>
-                          <span className="text-[10px] font-medium text-gray-700 w-12 text-right">
-                            {value.toLocaleString()}
-                          </span>
-                        </div>
-                      );
-                    });
-                  })()}
-                </div>
+                <ChartRenderer
+                  chartType={chartType}
+                  data={tableData}
+                  xKey={response.chart.x || response.chart.x_axis}
+                  yKey={response.chart.y || response.chart.y_axis}
+                />
               </div>
             )}
 
