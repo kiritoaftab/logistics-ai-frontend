@@ -55,7 +55,6 @@ export default function NodeDetailsPanel({ node, onClose }) {
             )}
           </div>
         );
-
       case 'data':
         return node.data?.response?.data ? (
           <div className="overflow-auto max-h-[400px]">
