@@ -1,7 +1,7 @@
 // src/App.jsx
-import React from "react";
+import React, { use, useEffect } from "react";
 import "reactflow/dist/style.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Sidebar from "./sidebar/Sidebar";
 import FlowPage from "./pages/FlowPage";
@@ -9,16 +9,9 @@ import Login from "./pages/LoginPage";
 
 function FlowLayout() {
   const [collapsed, setCollapsed] = React.useState(false);
-
-  const user = {
-    name: "John Smith",
-  };
-
   return (
     <div className="flex w-screen h-screen bg-gray-50 text-gray-800 overflow-hidden">
       <Sidebar
-        user={user}
-        onLogout={() => {}}
         onToggleSidebar={() => setCollapsed((prev) => !prev)}
         collapsed={collapsed}
       />
@@ -30,13 +23,30 @@ function FlowLayout() {
   );
 }
 
+function ProtectedRoute({ children }) {
+  const authToken = sessionStorage.getItem("auth_token");
+
+  if (!authToken) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+}
+
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={<FlowLayout />} /> */}
-        <Route path="/flow" element={<FlowLayout />} />
-        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/flow"
+          element={
+            <ProtectedRoute>
+              <FlowLayout />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/flow" replace />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,11 +1,5 @@
 import axios from "axios";
 
-const authToken = sessionStorage.getItem("auth_token");
-
-if (authToken) {
-  axios.defaults.headers.common["Authorization"] = `Bearer ${authToken}`;
-}
-
 const apiClient = axios.create({
   baseURL: "https://ai.uur.co.in/api",
   headers: {
@@ -13,13 +7,26 @@ const apiClient = axios.create({
   },
 });
 
+apiClient.interceptors.request.use(
+  (config) => {
+    const authToken = sessionStorage.getItem("auth_token");
+
+    if (authToken) {
+      config.headers.Authorization = `Bearer ${authToken}`;
+    }
+
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
+
 // ==================== QUERY APIS ====================
 
 // Main query API
 export const sendQuery = async (question, threadId = null) => {
   try {
     const requestBody = {
-      question: question,
+      question,
     };
 
     if (threadId) {

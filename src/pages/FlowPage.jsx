@@ -483,7 +483,7 @@ export default function FlowPage() {
             />
 
             {nodes.length === 0 && (
-              <Panel position="top-center" className="mt-16">
+              <Panel position="top-center" className="">
                 <div className="bg-white border border-gray-200 rounded-xl shadow-xl p-8 max-w-lg text-center">
                   <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Brain size={40} className="text-blue-600" />
