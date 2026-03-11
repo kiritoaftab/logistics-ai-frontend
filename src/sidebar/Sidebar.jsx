@@ -196,7 +196,7 @@ export default function Sidebar({ onToggleSidebar, collapsed }) {
       </div>
 
       {/* Quick Actions */}
-      {!collapsed && (
+      {/* {!collapsed && (
         <div className="px-4 py-3 border-b border-gray-200">
           <div className="flex items-center justify-between mb-2">
             <div className="text-xs font-medium text-gray-500 uppercase">
@@ -233,7 +233,7 @@ export default function Sidebar({ onToggleSidebar, collapsed }) {
             </button>
           </div>
         </div>
-      )}
+      )} */}
 
       {/* Thread List */}
       <div className="flex-1 overflow-auto px-3 py-2">

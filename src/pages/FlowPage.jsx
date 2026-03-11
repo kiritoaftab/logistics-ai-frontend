@@ -444,7 +444,7 @@ export default function FlowPage() {
         </div>
 
         <div className="flex gap-2">
-          <button className="flex items-center gap-1 px-3 py-1.5 text-xs border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-600">
+          {/* <button className="flex items-center gap-1 px-3 py-1.5 text-xs border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-600">
             <Filter size={12} /> Filter
           </button>
           <button className="flex items-center gap-1 px-3 py-1.5 text-xs border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-600">
@@ -452,7 +452,7 @@ export default function FlowPage() {
           </button>
           <button className="flex items-center gap-1 px-3 py-1.5 text-xs border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-600">
             <Share2 size={12} /> Share
-          </button>
+          </button> */}
         </div>
       </div>
 

@@ -53,12 +53,11 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Ambient glow orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 relative overflow-hidden">
+      {" "}
+      {/* <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" /> */}
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-400/8 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-500/6 rounded-full blur-2xl pointer-events-none" />
-
       {/* Subtle grid background */}
       <div
         className="absolute inset-0 pointer-events-none opacity-20"
@@ -68,7 +67,6 @@ const Login = () => {
           backgroundSize: "48px 48px",
         }}
       />
-
       <div className="w-full max-w-md relative z-10">
         {/* Header */}
         <div className="text-center mb-10">
@@ -92,19 +90,21 @@ const Login = () => {
             </span>
           </div>
 
-          <h1 className="text-3xl font-bold text-white tracking-tight">
+          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+            {" "}
             Logistics Intelligence
           </h1>
-          <p className="text-gray-500 mt-2 text-sm">
+          <p className="text-gray-600 mt-2 text-sm">
+            {" "}
             Powered by advanced AI to automate your supply chain
           </p>
         </div>
 
         {/* Card */}
         <div
-          className="rounded-2xl border border-white/8 p-8 relative"
+          className="rounded-2xl border border-gray-200 p-8 relative shadow-lg"
           style={{
-            background: "rgba(255,255,255,0.03)",
+            background: "#ffffff",
             backdropFilter: "blur(24px)",
           }}
         >
@@ -118,7 +118,8 @@ const Login = () => {
           />
 
           <div className="mb-8">
-            <h2 className="text-xl font-semibold text-white mb-1">
+            <h2 className="text-xl font-semibold text-gray-900 mb-1">
+              {" "}
               Authenticate to continue
             </h2>
             <p className="text-gray-500 text-sm">
@@ -138,10 +139,10 @@ const Login = () => {
                 onChange={(e) =>
                   setCredentials({ ...credentials, email: e.target.value })
                 }
-                className="w-full px-4 py-3 rounded-xl text-white text-sm placeholder-gray-600 outline-none transition-all duration-200"
+                className="w-full px-4 py-3 rounded-xl text-gray-900 text-sm placeholder-gray-400"
                 style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.08)",
+                  background: "#ffffff",
+                  border: "1px solid #e5e7eb",
                 }}
                 onFocus={(e) => {
                   e.target.style.border = "1px solid rgba(37,99,235,0.5)";
@@ -151,14 +152,14 @@ const Login = () => {
                   e.target.style.border = "1px solid rgba(255,255,255,0.08)";
                   e.target.style.boxShadow = "none";
                 }}
-                placeholder="you@company.com"
+                placeholder="Enter your email address"
                 required
               />
             </div>
 
             {/* Password */}
             <div>
-              <label className="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wider">
+              <label className="block text-xs font-medium text-gray-500 mb-2 uppercase tracking-wider">
                 Password
               </label>
               <div className="relative">
@@ -168,7 +169,7 @@ const Login = () => {
                   onChange={(e) =>
                     setCredentials({ ...credentials, password: e.target.value })
                   }
-                  className="w-full px-4 py-3 rounded-xl text-white text-sm placeholder-gray-600 outline-none transition-all duration-200 pr-12"
+                  className="w-full px-4 py-3 rounded-xl text-gray-900 text-sm placeholder-gray-600 outline-none transition-all duration-200 pr-12"
                   style={{
                     background: "rgba(255,255,255,0.05)",
                     border: "1px solid rgba(255,255,255,0.08)",
@@ -181,7 +182,7 @@ const Login = () => {
                     e.target.style.border = "1px solid rgba(255,255,255,0.08)";
                     e.target.style.boxShadow = "none";
                   }}
-                  placeholder="••••••••"
+                  placeholder="Enter your password"
                   required
                 />
                 <button
