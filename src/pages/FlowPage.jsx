@@ -104,11 +104,11 @@ export default function FlowPage() {
 
   const suggestedQueries = useMemo(
     () => [
-      "How many surgeries are scheduled today?",
-      "What is the total outstanding patient dues?",
-      "Show me department-wise patient count",
-      "List all critical patients in ICU",
-      "Total medicine stock expiring this month",
+      "What is the total revenue collected today, broken down by payment method?",
+      "Show me the top 10 bills with the highest outstanding balance",
+      "How many appointments were completed vs cancelled this week?",
+      "Which doctors have the most completed encounters this month?",
+      "How many active staff members are there in each department?",
     ],
     [],
   );
