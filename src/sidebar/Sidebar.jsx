@@ -136,9 +136,9 @@ export default function Sidebar({ onToggleSidebar, collapsed }) {
 
         {!collapsed && (
           <div className="flex-1 min-w-0">
-            <div className="text-base font-bold text-gray-800">WMS AI</div>
+            <div className="text-base font-bold text-gray-800">Orbit Care</div>
             <div className="text-[10px] text-gray-500">
-              Intelligent Warehouse
+              Intelligent Care
             </div>
           </div>
         )}
@@ -167,7 +167,7 @@ export default function Sidebar({ onToggleSidebar, collapsed }) {
               <div className="text-sm font-medium text-gray-800 truncate">
                 {"Admin User"}
               </div>
-              <div className="text-[10px] text-gray-500">Warehouse Manager</div>
+              <div className="text-[10px] text-gray-500">Care Manager</div>
             </div>
 
             <button

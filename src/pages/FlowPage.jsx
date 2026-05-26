@@ -104,11 +104,11 @@ export default function FlowPage() {
 
   const suggestedQueries = useMemo(
     () => [
-      "What's my total ASNs last 30 days?",
-      "What are the status of my various ASNs?",
-      "Show me inventory by category",
-      "Total revenue this month",
-      "Pending putaway tasks",
+      "How many surgeries are scheduled today?",
+      "What is the total outstanding patient dues?",
+      "Show me department-wise patient count",
+      "List all critical patients in ICU",
+      "Total medicine stock expiring this month",
     ],
     [],
   );
@@ -490,7 +490,7 @@ export default function FlowPage() {
                   </div>
 
                   <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                    Ask your warehouse anything
+                    Ask Orbit Care anything
                   </h2>
                   <p className="text-sm text-gray-600 mb-6">
                     Type a question below to start your thread.
@@ -519,7 +519,7 @@ export default function FlowPage() {
                           setInputValue("");
                         }
                       }}
-                      placeholder="Ask your warehouse anything..."
+                      placeholder="Ask Orbit Care anything..."
                       className="w-full px-4 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <button

@@ -34,6 +34,17 @@ function ProtectedRoute({ children }) {
 }
 
 export default function App() {
+  useEffect(() => {
+    const handleMessage = (event) => {
+      if (event.origin !== "http://localhost:5174") return;
+      if (event.data?.type === "AUTH_TOKEN" && event.data?.token) {
+        sessionStorage.setItem("auth_token", event.data.token);
+      }
+    };
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -46,6 +57,7 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/embed" element={<FlowLayout />} />
         <Route path="*" element={<Navigate to="/flow" replace />} />
       </Routes>
     </BrowserRouter>
