@@ -27,16 +27,20 @@ const Login = () => {
     try {
       setIsLoading(true);
 
-      const res = await axios.post(`${AUTH_BASE_URL}/auth/login`, credentials, {
-        headers: {
-          "Content-Type": "application/json",
+      const res = await axios.post(
+        `${AUTH_BASE_URL}/auth/login`,
+        { identifier: credentials.email, password: credentials.password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-      });
+      );
 
       const { success, message, data } = res.data;
 
       if (success) {
-        sessionStorage.setItem("auth_token", data.token);
+        sessionStorage.setItem("auth_token", data.accessToken);
         sessionStorage.setItem("user", JSON.stringify(data.user));
         toast.success(message || "Access granted");
         navigate("/flow");

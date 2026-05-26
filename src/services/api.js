@@ -1,7 +1,8 @@
 import axios from "axios";
+import { BASE_URL } from "../constant";
 
 const apiClient = axios.create({
-  baseURL: "https://ai.uur.co.in/api",
+  baseURL: `${BASE_URL}`,
   headers: {
     "Content-Type": "application/json",
   },
