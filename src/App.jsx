@@ -36,7 +36,7 @@ function ProtectedRoute({ children }) {
 export default function App() {
   useEffect(() => {
     const handleMessage = (event) => {
-      if (event.origin !== "http://localhost:5174") return;
+      if (event.origin !== "https://vikram-hospital.orbitcoretech.org") return;
       if (event.data?.type === "AUTH_TOKEN" && event.data?.token) {
         sessionStorage.setItem("auth_token", event.data.token);
       }
