@@ -1,7 +1,6 @@
 // src/sidebar/Sidebar.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  Warehouse,
   MessageSquare,
   Plus,
   LogOut,
@@ -130,8 +129,8 @@ export default function Sidebar({ onToggleSidebar, collapsed }) {
           collapsed ? "justify-center" : ""
         }`}
       >
-        <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
-          <Warehouse size={collapsed ? 20 : 24} className="text-blue-600" />
+        <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden">
+          <img src="/src/assets/orbit.png" alt="Orbit Care" className="w-full h-full object-contain" />
         </div>
 
         {!collapsed && (
